@@ -6,8 +6,8 @@ import {
   JetBrains_Mono,
   Fraunces,
   Spline_Sans_Mono,
-  Big_Shoulders,
 } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
 import ClientLayoutWrapper from "@/components/ClientLayoutWrapper";
@@ -45,10 +45,11 @@ const splineSansMono = Spline_Sans_Mono({
   weight: ["400", "500", "600", "700"],
 });
 
-const bigShoulders = Big_Shoulders({
+const bigShoulders = localFont({
+  src: "./fonts/BigShoulders-Bold.woff2",
   variable: "--font-big-shoulders",
-  subsets: ["latin"],
-  weight: ["700", "800", "900"],
+  display: "swap",
+  weight: "700 900",
 });
 
 export const metadata: Metadata = {

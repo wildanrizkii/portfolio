@@ -124,8 +124,8 @@ const HallmarkNavbar = () => {
                 damping: isHallmark ? 20 : 10,
               }}
               className={isHallmark
-                ? "aspect-square flex flex-col items-center justify-center text-foreground border border-neutral-300 dark:border-neutral-800 bg-white/30 dark:bg-white/5 hover:bg-foreground hover:text-background transition-colors duration-200 rounded-none cursor-none clickable"
-                : `${link.bgColor} aspect-square flex flex-col items-center justify-center text-foreground border-2 border-foreground rounded-none`
+                ? "aspect-square flex flex-col items-center justify-center text-foreground border border-neutral-300 dark:border-neutral-800 bg-white/30 dark:bg-white/5 hover:bg-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-white transition-colors duration-200 rounded-none cursor-none clickable"
+                : `${link.bgColor} aspect-square flex flex-col items-center justify-center text-foreground border-2 border-foreground rounded-none hover:bg-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-white`
               }
             >
               <span className={isHallmark ? "text-xl mb-2" : "text-2xl mb-1"}>{link.icon}</span>
@@ -138,8 +138,8 @@ const HallmarkNavbar = () => {
   );
 
   const MobileSocialLinks = () => (
-    <div className="block md:hidden pb-28">
-      <div className="flex flex-col items-center justify-center gap-4">
+    <div className="block md:hidden pb-10 pt-4">
+      <div className="flex flex-row items-center justify-center gap-4">
         {socialLinks.map((link) => (
           <motion.a
             key={link.title}
@@ -153,7 +153,7 @@ const HallmarkNavbar = () => {
               boxShadow: isHallmark ? "none" : "0px 8px 15px rgba(0,0,0,0.3)",
             }}
             className={isHallmark
-              ? "w-12 h-12 bg-white/30 dark:bg-white/5 border border-neutral-300 dark:border-neutral-800 rounded-none flex items-center justify-center text-foreground hover:bg-foreground hover:text-background transition-colors duration-200"
+              ? "w-12 h-12 bg-white/30 dark:bg-white/5 border border-neutral-300 dark:border-neutral-800 rounded-none flex items-center justify-center text-foreground hover:bg-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-white transition-colors duration-200"
               : "w-12 h-12 bg-foreground border-solid rounded-full flex items-center justify-center text-background"
             }
           >
@@ -189,16 +189,12 @@ const HallmarkNavbar = () => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3 relative z-50">
-              {isHallmark ? (
-                <div className="text-xl font-mono tracking-tight text-foreground select-none cursor-none clickable">
-                  .wildanrizkii
-                </div>
-              ) : (
-                <div className="text-2xl font-bold text-dark-gray hover:text-primary relative group cursor-none clickable">
-                  <span className="relative z-10">.wildanrizkii</span>
-                  <span className="absolute bottom-0 left-0 w-0 h-1 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                </div>
-              )}
+              <Link
+                href="/"
+                className="text-xl font-mono tracking-tight text-foreground hover:opacity-75 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2"
+              >
+                .wildanrizkii
+              </Link>
             </div>
 
             <div className="flex items-center gap-4 relative z-50">
@@ -208,7 +204,7 @@ const HallmarkNavbar = () => {
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                     aria-label="Select Design System"
                     title="Select Design System"
-                    className="h-10 px-3 rounded-none border border-neutral-300 dark:border-neutral-800 bg-white/40 dark:bg-white/5 hover:bg-foreground hover:text-background dark:hover:text-foreground text-foreground flex items-center justify-center text-xs font-mono uppercase tracking-wider gap-1.5 cursor-none clickable font-semibold transition-colors duration-200"
+                    className="h-10 px-3 rounded-none border border-neutral-300 dark:border-neutral-800 bg-white/40 dark:bg-white/5 hover:bg-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-white text-foreground flex items-center justify-center text-xs font-mono uppercase tracking-wider gap-1.5 cursor-none clickable font-semibold transition-colors duration-200"
                   >
                     <div className="w-4 h-4 flex items-center justify-center">
                       {aesthetic === "broadsheet" ? <Newspaper className="w-3.5 h-3.5" /> : aesthetic === "hallmark" ? <LayoutGrid className="w-3.5 h-3.5" /> : <Circle className="w-2.5 h-2.5 fill-current" />}
@@ -230,7 +226,7 @@ const HallmarkNavbar = () => {
                             setAesthetic("original");
                             setDropdownOpen(false);
                           }}
-                          className={`w-full flex items-center gap-2 px-3 py-2 text-xs uppercase tracking-wider text-foreground hover:bg-foreground hover:text-background transition-colors duration-150 text-left cursor-none clickable font-mono ${aesthetic === "original" ? "bg-foreground/10" : ""}`}
+                          className={`w-full flex items-center gap-2 px-3 py-2 text-xs uppercase tracking-wider text-foreground hover:bg-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-white transition-colors duration-150 text-left cursor-none clickable font-mono ${aesthetic === "original" ? "bg-foreground/10" : ""}`}
                         >
                           <div className="w-4 h-4 flex items-center justify-center">
                             <Circle className="w-2.5 h-2.5 fill-current" />
@@ -242,7 +238,7 @@ const HallmarkNavbar = () => {
                             setAesthetic("hallmark");
                             setDropdownOpen(false);
                           }}
-                          className={`w-full flex items-center gap-2 px-3 py-2 text-xs uppercase tracking-wider text-foreground hover:bg-foreground hover:text-background transition-colors duration-150 text-left cursor-none clickable font-mono ${aesthetic === "hallmark" ? "bg-foreground/10" : ""}`}
+                          className={`w-full flex items-center gap-2 px-3 py-2 text-xs uppercase tracking-wider text-foreground hover:bg-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-white transition-colors duration-150 text-left cursor-none clickable font-mono ${aesthetic === "hallmark" ? "bg-foreground/10" : ""}`}
                         >
                           <div className="w-4 h-4 flex items-center justify-center">
                             <LayoutGrid className="w-3.5 h-3.5" />
@@ -254,7 +250,7 @@ const HallmarkNavbar = () => {
                             setAesthetic("broadsheet");
                             setDropdownOpen(false);
                           }}
-                          className={`w-full flex items-center gap-2 px-3 py-2 text-xs uppercase tracking-wider text-foreground hover:bg-foreground hover:text-background transition-colors duration-150 text-left cursor-none clickable font-mono ${aesthetic === "broadsheet" ? "bg-foreground/10" : ""}`}
+                          className={`w-full flex items-center gap-2 px-3 py-2 text-xs uppercase tracking-wider text-foreground hover:bg-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-white transition-colors duration-150 text-left cursor-none clickable font-mono ${aesthetic === "broadsheet" ? "bg-foreground/10" : ""}`}
                         >
                           <div className="w-4 h-4 flex items-center justify-center">
                             <Newspaper className="w-3.5 h-3.5" />
@@ -318,10 +314,7 @@ const HallmarkNavbar = () => {
                   <Link
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className={isHallmark
-                      ? "block text-5xl md:text-7xl text-nowrap font-serif italic text-foreground transition-all duration-300 hover:pl-4 hover:opacity-75 select-none cursor-none clickable focus-visible:outline-2 focus-visible:outline-offset-2"
-                      : "block text-4xl text-nowrap font-medium text-dark-gray transition-transform duration-300 hover:scale-110 hover:text-primary cursor-none clickable focus-visible:outline-2 focus-visible:outline-offset-2"
-                    }
+                    className="block text-5xl md:text-7xl text-nowrap font-serif italic text-foreground transition-all duration-300 hover:pl-4 hover:text-neutral-500 dark:hover:text-neutral-300 select-none cursor-none clickable focus-visible:outline-2 focus-visible:outline-offset-2"
                   >
                     {link.label}
                   </Link>
@@ -346,7 +339,7 @@ const HallmarkNavbar = () => {
                     onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
                     aria-label="Select Design System"
                     title="Select Design System"
-                    className="h-10 px-3 rounded-none border border-neutral-300 dark:border-neutral-800 bg-white/40 dark:bg-white/5 hover:bg-foreground hover:text-background dark:hover:text-foreground text-foreground flex items-center justify-center text-xs font-mono uppercase tracking-wider gap-1.5 cursor-none clickable font-semibold transition-colors duration-200"
+                    className="h-10 px-3 rounded-none border border-neutral-300 dark:border-neutral-800 bg-white/40 dark:bg-white/5 hover:bg-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-white text-foreground flex items-center justify-center text-xs font-mono uppercase tracking-wider gap-1.5 cursor-none clickable font-semibold transition-colors duration-200"
                   >
                     <div className="w-4 h-4 flex items-center justify-center">
                       {aesthetic === "broadsheet" ? <Newspaper className="w-3.5 h-3.5" /> : aesthetic === "hallmark" ? <LayoutGrid className="w-3.5 h-3.5" /> : <Circle className="w-2.5 h-2.5 fill-current" />}
@@ -369,7 +362,7 @@ const HallmarkNavbar = () => {
                             setMobileDropdownOpen(false);
                             setIsOpen(false);
                           }}
-                          className={`w-full flex items-center gap-2 px-3 py-2 text-xs uppercase tracking-wider text-foreground hover:bg-(--accent-vermilion) hover:text-white transition-colors duration-150 text-left cursor-none clickable font-mono ${aesthetic === "original" ? "bg-foreground/10" : ""}`}
+                          className={`w-full flex items-center gap-2 px-3 py-2 text-xs uppercase tracking-wider text-foreground hover:bg-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-white transition-colors duration-150 text-left cursor-none clickable font-mono ${aesthetic === "original" ? "bg-foreground/10" : ""}`}
                         >
                           <div className="w-4 h-4 flex items-center justify-center">
                             <Circle className="w-2.5 h-2.5 fill-current" />
@@ -382,7 +375,7 @@ const HallmarkNavbar = () => {
                             setMobileDropdownOpen(false);
                             setIsOpen(false);
                           }}
-                          className={`w-full flex items-center gap-2 px-3 py-2 text-xs uppercase tracking-wider text-foreground hover:bg-(--accent-vermilion) hover:text-white transition-colors duration-150 text-left cursor-none clickable font-mono ${aesthetic === "hallmark" ? "bg-foreground/10" : ""}`}
+                          className={`w-full flex items-center gap-2 px-3 py-2 text-xs uppercase tracking-wider text-foreground hover:bg-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-white transition-colors duration-150 text-left cursor-none clickable font-mono ${aesthetic === "hallmark" ? "bg-foreground/10" : ""}`}
                         >
                           <div className="w-4 h-4 flex items-center justify-center">
                             <LayoutGrid className="w-3.5 h-3.5" />
@@ -395,7 +388,7 @@ const HallmarkNavbar = () => {
                             setMobileDropdownOpen(false);
                             setIsOpen(false);
                           }}
-                          className={`w-full flex items-center gap-2 px-3 py-2 text-xs uppercase tracking-wider text-foreground hover:bg-(--accent-vermilion) hover:text-white transition-colors duration-150 text-left cursor-none clickable font-mono ${aesthetic === "broadsheet" ? "bg-foreground/10" : ""}`}
+                          className={`w-full flex items-center gap-2 px-3 py-2 text-xs uppercase tracking-wider text-foreground hover:bg-neutral-200 dark:hover:bg-neutral-800 dark:hover:text-white transition-colors duration-150 text-left cursor-none clickable font-mono ${aesthetic === "broadsheet" ? "bg-foreground/10" : ""}`}
                         >
                           <div className="w-4 h-4 flex items-center justify-center">
                             <Newspaper className="w-3.5 h-3.5" />

@@ -123,13 +123,10 @@ const BroadsheetNavbar = () => {
                 stiffness: isHallmark ? 300 : 200,
                 damping: isHallmark ? 20 : 10,
               }}
-              className={isHallmark
-                ? "aspect-square flex flex-col items-center justify-center text-foreground border border-neutral-300 dark:border-neutral-800 bg-white/30 dark:bg-white/5 hover:bg-foreground hover:text-background transition-colors duration-200 rounded-none cursor-none clickable"
-                : `${link.bgColor} aspect-square flex flex-col items-center justify-center text-foreground border-2 border-foreground rounded-none`
-              }
+              className="aspect-square flex flex-col items-center justify-center text-foreground border border-neutral-300 dark:border-neutral-800 bg-white/30 dark:bg-white/5 hover:bg-(--accent-vermilion) hover:text-white dark:hover:bg-(--accent-vermilion) dark:hover:text-white transition-colors duration-200 rounded-none cursor-none clickable"
             >
-              <span className={isHallmark ? "text-xl mb-2" : "text-2xl mb-1"}>{link.icon}</span>
-              <span className={isHallmark ? "text-sm font-mono uppercase tracking-wider" : "text-lg"}>{link.title}</span>
+              <span className="text-xl mb-2">{link.icon}</span>
+              <span className="text-sm font-mono uppercase tracking-wider">{link.title}</span>
             </motion.a>
           ))}
         </div>
@@ -138,36 +135,21 @@ const BroadsheetNavbar = () => {
   );
 
   const MobileSocialLinks = () => (
-    <div className="block md:hidden pb-28">
-      <div className="flex flex-col items-center justify-center gap-4">
+    <div className="block md:hidden pb-10 pt-4">
+      <div className="flex flex-row items-center justify-center gap-4">
         {socialLinks.map((link) => (
           <motion.a
             key={link.title}
             href={link.href}
-            initial={{ opacity: 0, scale: isHallmark ? 0.95 : 0.8 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             whileHover={{
-              scale: isHallmark ? 1.05 : 1.2,
-              y: isHallmark ? 0 : -5,
-              rotate: isHallmark ? 0 : 5,
-              boxShadow: isHallmark ? "none" : "0px 8px 15px rgba(0,0,0,0.3)",
+              scale: 1.05,
+              boxShadow: "none",
             }}
-            className={isHallmark
-              ? "w-12 h-12 bg-white/30 dark:bg-white/5 border border-neutral-300 dark:border-neutral-800 rounded-none flex items-center justify-center text-foreground hover:bg-foreground hover:text-background transition-colors duration-200"
-              : "w-12 h-12 bg-foreground border-solid rounded-full flex items-center justify-center text-background"
-            }
+            className="w-12 h-12 bg-white/30 dark:bg-white/5 border border-neutral-300 dark:border-neutral-800 rounded-none flex items-center justify-center text-foreground hover:bg-(--accent-vermilion) hover:text-white dark:hover:bg-(--accent-vermilion) dark:hover:text-white transition-colors duration-200"
           >
-            {isHallmark ? (
-              <span className="text-xl">{link.icon}</span>
-            ) : (
-              <motion.span
-                whileHover={{ rotate: -10 }}
-                transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                className="text-xl"
-              >
-                {link.icon}
-              </motion.span>
-            )}
+            <span className="text-xl">{link.icon}</span>
           </motion.a>
         ))}
       </div>
@@ -189,16 +171,12 @@ const BroadsheetNavbar = () => {
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3 relative z-50">
-              {isHallmark ? (
-                <div className="text-xl font-mono tracking-tight text-foreground select-none cursor-none clickable">
-                  .wildanrizkii
-                </div>
-              ) : (
-                <div className="text-2xl font-bold text-dark-gray hover:text-primary relative group cursor-none clickable">
-                  <span className="relative z-10">.wildanrizkii</span>
-                  <span className="absolute bottom-0 left-0 w-0 h-1 bg-primary transition-all duration-300 group-hover:w-full"></span>
-                </div>
-              )}
+              <Link
+                href="/"
+                className="text-xl font-display font-black tracking-wider uppercase text-foreground hover:text-(--accent-vermilion) transition-colors focus-visible:outline-2 focus-visible:outline-offset-2"
+              >
+                .wildanrizkii
+              </Link>
             </div>
 
             <div className="flex items-center gap-4 relative z-50">
@@ -208,7 +186,7 @@ const BroadsheetNavbar = () => {
                     onClick={() => setDropdownOpen(!dropdownOpen)}
                     aria-label="Select Design System"
                     title="Select Design System"
-                    className="h-10 px-3 rounded-none border border-neutral-300 dark:border-neutral-800 bg-white/40 dark:bg-white/5 hover:bg-foreground hover:text-background dark:hover:text-foreground text-foreground flex items-center justify-center text-xs font-mono uppercase tracking-wider gap-1.5 cursor-none clickable font-semibold transition-colors duration-200"
+                    className="h-10 px-3 rounded-none border border-neutral-300 dark:border-neutral-800 bg-white/40 dark:bg-white/5 hover:bg-(--accent-vermilion) hover:text-white dark:hover:bg-(--accent-vermilion) dark:hover:text-white text-foreground flex items-center justify-center text-xs font-mono uppercase tracking-wider gap-1.5 cursor-none clickable font-semibold transition-colors duration-200"
                   >
                     <div className="w-4 h-4 flex items-center justify-center">
                       {aesthetic === "broadsheet" ? <Newspaper className="w-3.5 h-3.5" /> : aesthetic === "hallmark" ? <LayoutGrid className="w-3.5 h-3.5" /> : <Circle className="w-2.5 h-2.5 fill-current" />}
@@ -318,10 +296,7 @@ const BroadsheetNavbar = () => {
                   <Link
                     href={link.href}
                     onClick={() => setIsOpen(false)}
-                    className={isHallmark
-                      ? "block text-5xl md:text-7xl text-nowrap font-serif italic text-foreground transition-all duration-300 hover:pl-4 hover:opacity-75 select-none cursor-none clickable focus-visible:outline-2 focus-visible:outline-offset-2"
-                      : "block text-4xl text-nowrap font-medium text-dark-gray transition-transform duration-300 hover:scale-110 hover:text-primary cursor-none clickable focus-visible:outline-2 focus-visible:outline-offset-2"
-                    }
+                    className="block text-5xl md:text-7xl text-nowrap font-display font-black uppercase text-foreground transition-all duration-200 hover:pl-4 hover:text-(--accent-vermilion) select-none cursor-none clickable focus-visible:outline-2 focus-visible:outline-offset-2"
                   >
                     {link.label}
                   </Link>
@@ -346,7 +321,7 @@ const BroadsheetNavbar = () => {
                     onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
                     aria-label="Select Design System"
                     title="Select Design System"
-                    className="h-10 px-3 rounded-none border border-neutral-300 dark:border-neutral-800 bg-white/40 dark:bg-white/5 hover:bg-foreground hover:text-background dark:hover:text-foreground text-foreground flex items-center justify-center text-xs font-mono uppercase tracking-wider gap-1.5 cursor-none clickable font-semibold transition-colors duration-200"
+                    className="h-10 px-3 rounded-none border border-neutral-300 dark:border-neutral-800 bg-white/40 dark:bg-white/5 hover:bg-(--accent-vermilion) hover:text-white dark:hover:bg-(--accent-vermilion) dark:hover:text-white text-foreground flex items-center justify-center text-xs font-mono uppercase tracking-wider gap-1.5 cursor-none clickable font-semibold transition-colors duration-200"
                   >
                     <div className="w-4 h-4 flex items-center justify-center">
                       {aesthetic === "broadsheet" ? <Newspaper className="w-3.5 h-3.5" /> : aesthetic === "hallmark" ? <LayoutGrid className="w-3.5 h-3.5" /> : <Circle className="w-2.5 h-2.5 fill-current" />}

@@ -7,7 +7,7 @@
     [ Three Aesthetics. Zero Slop. Full-Stack Reality. ]
 ```
 
-Portofolio personal berbasis **Next.js 16 (App Router)** dan **React 19**, dibangun dengan **TypeScript** end-to-end. Bukan sekadar kartu nama digital atau template portofolio standar, repositori ini mengimplementasikan sistem multi-estetika dinamis yang dapat beralih runtime tanpa reload halaman.
+Portofolio personal berbasis **Next.js 16 (App Router)** dan **React 19** yang diintegrasikan dengan **TanStack Redact** (`@tanstack/redact/next`) sebagai browser client renderer, dibangun dengan **TypeScript** end-to-end. Bukan sekadar kartu nama digital atau template portofolio standar, repositori ini mengimplementasikan sistem multi-estetika dinamis yang dapat beralih runtime tanpa reload halaman.
 
 ---
 
@@ -68,7 +68,8 @@ Portofolio ini menampilkan studi kasus nyata dari sistem web yang telah di-deplo
 
 ```text
 Core Runtime       : Next.js 16 (App Router + Turbopack)
-UI Library         : React 19
+Server Engine      : React 19 (SSR & Server Components)
+Client Renderer    : TanStack Redact (@tanstack/redact/next)
 Type System        : TypeScript 5
 CSS Framework      : Tailwind CSS v4
 Motion Engine      : Framer Motion

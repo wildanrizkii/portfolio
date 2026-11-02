@@ -1,3 +1,5 @@
+import { withRedact } from '@tanstack/redact/next';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -6,5 +8,5 @@ const nextConfig = {
   allowedDevOrigins: ['192.168.75.183', '192.168.75.116'],
 };
 
-export default nextConfig;
+export default withRedact(nextConfig);
 

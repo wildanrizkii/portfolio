@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useMemo, ChangeEvent } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
@@ -8,69 +8,7 @@ import { FiArrowRight, FiSearch } from "react-icons/fi";
 import { useTransitionState } from "../../PageTransition";
 import useDebounce from "@/hooks/useDebounce";
 import { CropMarks, RisoText } from "../../BroadsheetHelpers";
-
-interface ProjectItem {
-  title: string;
-  category: string;
-  description: string;
-  tech: string[];
-  img: string;
-  imgFit?: string;
-  href: string;
-  categoryFilter: string;
-}
-
-const projectList: ProjectItem[] = [
-  {
-    title: "Adora SaaS",
-    category: "SaaS · Healthcare ERP",
-    description: "A cloud-native, multi-tenant SaaS pharmacy platform rebuilt with NestJS & Next.js 16 — managing prescriptions, drug inventory, staff roles, and branch analytics across multiple tenants.",
-    tech: ["Next.js 16", "NestJS", "React 19", "Shadcn UI"],
-    img: "/images/adora-saas/adora-1.webp",
-    imgFit: "contain",
-    href: "/projects/adora-saas",
-    categoryFilter: "saas",
-  },
-  {
-    title: "Cash Flow Tracking Application",
-    category: "Financial Dashboard",
-    description: "A tracking application with clean analytics, charts, and transaction history filters for personal financial management.",
-    tech: ["Next.js", "Recharts", "PostgreSQL", "Supabase"],
-    img: "/images/Cashify.png",
-    href: "/projects/cashflow",
-    categoryFilter: "finance",
-  },
-  {
-    title: "Adora Pharmacy Management System",
-    category: "Healthcare · Management System",
-    description: "A full-featured pharmacy management system built for PT Adora Cipta Medika (2024) — managing prescriptions, drug inventory, staff roles, and financial reporting from a centralized dashboard.",
-    tech: ["Next.js", "Express.js", "Ant Design", "PostgreSQL"],
-    img: "/images/Apotek.jpg",
-    href: "/projects/adora",
-    categoryFilter: "saas",
-  },
-  {
-    title: "Spare Part Information System",
-    category: "Full-Stack Sales Platform",
-    description: "An intuitive web platform designed to manage complex spare part hierarchies, vendor specifications, materials, and automated order generation.",
-    tech: ["Next.js", "React", "Tailwind CSS", "PostgreSQL"],
-    img: "",
-    href: "/projects/sparepart",
-    categoryFilter: "full-stack",
-  },
-];
-
-interface CategoryItem {
-  id: string;
-  label: string;
-}
-
-const categories: CategoryItem[] = [
-  { id: "all", label: "All Works" },
-  { id: "full-stack", label: "Full-Stack" },
-  { id: "saas", label: "Healthcare SaaS" },
-  { id: "finance", label: "Finance" },
-];
+import { projectList, projectCategories as categories, ProjectItem } from "@/data/projects";
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 30 },
@@ -88,7 +26,6 @@ const staggerChildren: Variants = {
 };
 
 const BroadsheetProjectsList = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const { isTransitioning } = useTransitionState();
   const [searchTerm, setSearchTerm] = useState("");
@@ -227,55 +164,54 @@ const BroadsheetProjectsList = () => {
                           key={project.title}
                           className="h-full"
                         >
-                          <div
-                            onClick={() => router.push(project.href)}
-                            className="p-8 border border-foreground/30 -mr-px -mt-px bg-white/10 dark:bg-white/2 backdrop-blur-sm flex flex-col justify-between hover:bg-white/20 transition-all duration-200 cursor-none clickable rounded-none group shadow-[4px_4px_0px_0px_rgba(0,0,0,0.05)] hover:shadow-none active:translate-y-px min-h-115"
+                          <Link
+                            href={project.href}
+                            className="block h-full cursor-none clickable focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
                           >
-                            <div className="space-y-6">
-                              <div className="flex justify-between items-start">
-                                <span className="text-[10px] font-mono text-white bg-(--accent-teal) px-2 py-0.5 uppercase tracking-wider">
-                                  {project.category}
-                                </span>
-                                 <span className="text-xs font-mono text-muted-foreground">
-                                   {(() => {
-                                     const slug = project.href.split("/").pop();
-                                     if (slug === "adora-saas") return "2026";
-                                     if (slug === "sparepart" || slug === "cashflow") return "2025";
-                                     return "2024";
-                                   })()}
-                                 </span>
-                              </div>
-
-                              <div className="space-y-2">
-                                <h2 className="text-3xl md:text-4xl font-display font-black uppercase text-foreground leading-none group-hover:text-(--accent-vermilion) transition-colors">
-                                  {project.title}
-                                </h2>
-                                <p className="text-sm font-serif text-muted-foreground leading-relaxed">
-                                  {project.description}
-                                </p>
-                              </div>
-                            </div>
-
-                            <div className="space-y-4">
-                              <div className="flex flex-wrap gap-2 pt-2">
-                                {project.tech.map((t) => (
-                                  <span
-                                    key={t}
-                                    className="text-[10px] font-mono text-foreground bg-white/40 dark:bg-white/5 border border-foreground/20 px-2.5 py-1 rounded-none"
-                                  >
-                                    {t}
+                            <div
+                              className="p-8 border border-foreground/30 -mr-px -mt-px bg-white/10 dark:bg-white/2 backdrop-blur-sm flex flex-col justify-between hover:bg-white/20 transition-all duration-200 rounded-none group shadow-[4px_4px_0px_0px_rgba(0,0,0,0.05)] hover:shadow-none active:translate-y-px min-h-115 h-full"
+                            >
+                              <div className="space-y-6">
+                                <div className="flex justify-between items-start">
+                                  <span className="text-[10px] font-mono text-white bg-(--accent-teal) px-2 py-0.5 uppercase tracking-wider">
+                                    {project.category}
                                   </span>
-                                ))}
+                                  <span className="text-xs font-mono text-muted-foreground">
+                                    {project.year}
+                                  </span>
+                                </div>
+
+                                <div className="space-y-2">
+                                  <h2 className="text-3xl md:text-4xl font-display font-black uppercase text-foreground leading-none group-hover:text-(--accent-vermilion) transition-colors">
+                                    {project.title}
+                                  </h2>
+                                  <p className="text-sm font-serif text-muted-foreground leading-relaxed">
+                                    {project.description}
+                                  </p>
+                                </div>
                               </div>
 
-                              <div className="pt-4 border-t border-foreground/10 flex justify-between items-center group-hover:border-foreground/30 transition-colors">
-                                <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground group-hover:text-foreground">
-                                  Case Study
-                                </span>
-                                <FiArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-(--accent-vermilion)" />
+                              <div className="space-y-4">
+                                <div className="flex flex-wrap gap-2 pt-2">
+                                  {project.tech.map((t) => (
+                                    <span
+                                      key={t}
+                                      className="text-[10px] font-mono text-foreground bg-white/40 dark:bg-white/5 border border-foreground/20 px-2.5 py-1 rounded-none"
+                                    >
+                                      {t}
+                                    </span>
+                                  ))}
+                                </div>
+
+                                <div className="pt-4 border-t border-foreground/10 flex justify-between items-center group-hover:border-foreground/30 transition-colors">
+                                  <span className="text-[10px] font-mono uppercase tracking-widest text-muted-foreground group-hover:text-foreground">
+                                    Case Study
+                                  </span>
+                                  <FiArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-(--accent-vermilion)" />
+                                </div>
                               </div>
                             </div>
-                          </div>
+                          </Link>
                         </motion.div>
                       ))}
                     </AnimatePresence>

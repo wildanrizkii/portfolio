@@ -20,15 +20,17 @@ const ThemeToggle = ({ className = "" }: ThemeToggleProps) => {
 
   const handleThemeToggle = (e: MouseEvent<HTMLButtonElement>) => {
     const newTheme = theme === "light" ? "dark" : "light";
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    // Fallback for browsers without View Transitions API
-    if (!document.startViewTransition) {
+    // Direct toggle when reduced motion is preferred or View Transitions are unsupported
+    if (!document.startViewTransition || prefersReducedMotion) {
       setTheme(newTheme);
       return;
     }
 
-    const x = e.clientX;
-    const y = e.clientY;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX || rect.left + rect.width / 2;
+    const y = e.clientY || rect.top + rect.height / 2;
 
     const endRadius = Math.hypot(
       Math.max(x, window.innerWidth - x),

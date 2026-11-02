@@ -30,16 +30,7 @@ interface SkillCategory {
 
 const OriginalTechTools = () => {
   const pathname = usePathname();
-  const [isMounted, setIsMounted] = useState<boolean>(false);
   const { isTransitioning } = useTransitionState();
-
-  useEffect(() => {
-    setIsMounted(false);
-    const timer = setTimeout(() => {
-      setIsMounted(true);
-    }, 50);
-    return () => clearTimeout(timer);
-  }, [pathname]);
 
   const skillCategories: SkillCategory[] = [
     {
@@ -69,36 +60,35 @@ const OriginalTechTools = () => {
   ];
 
   return (
-    isMounted && (
-      <div className="relative justify-center bg-transparent px-4 md:px-8 w-full max-w-5xl mx-auto py-16">
-        <motion.section
-          key={pathname}
-          initial="hidden"
-          whileInView={isTransitioning ? "hidden" : "visible"}
-          viewport={{ once: true, amount: 0.1 }}
-          variants={staggerChildren}
-          className="space-y-12"
-        >
-          <div>
-            <motion.p className="text-sm font-semibold tracking-widest text-gray-500 uppercase mb-2" variants={fadeInUp}>
-              Competencies
-            </motion.p>
-            <motion.h1
-              className="text-4xl md:text-5xl font-medium text-dark-gray"
-              variants={fadeInUp}
-            >
-              Tech & Tools
-            </motion.h1>
-          </div>
+    <div className="relative justify-center bg-transparent px-4 md:px-8 w-full max-w-5xl mx-auto py-16">
+      <motion.section
+        key={pathname}
+        initial="hidden"
+        whileInView={isTransitioning ? "hidden" : "visible"}
+        viewport={{ once: true, amount: 0.1 }}
+        variants={staggerChildren}
+        className="space-y-12"
+      >
+        <div>
+          <motion.p className="text-sm font-semibold tracking-widest text-gray-500 uppercase mb-2" variants={fadeInUp}>
+            Competencies
+          </motion.p>
+          <motion.h1
+            className="text-4xl md:text-5xl font-medium text-dark-gray"
+            variants={fadeInUp}
+          >
+            Tech & Tools
+          </motion.h1>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {skillCategories.map((category, idx) => (
-              <motion.div
-                key={idx}
-                variants={fadeInUp}
-                whileHover={{ y: -6 }}
-                className="p-8 rounded-2xl border-2 border-neutral-300 dark:border-neutral-800 bg-white/30 dark:bg-white/5 backdrop-blur-md hover:border-foreground transition-colors duration-500 cursor-none clickable flex flex-col justify-between group h-full"
-              >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {skillCategories.map((category, idx) => (
+            <motion.div
+              key={idx}
+              variants={fadeInUp}
+              whileHover={{ y: -6 }}
+              className="p-8 rounded-2xl border-2 border-neutral-300 dark:border-neutral-800 bg-white/30 dark:bg-white/5 backdrop-blur-md hover:border-foreground transition-colors duration-500 flex flex-col justify-between group h-full"
+            >
                 <div className="space-y-4">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-neutral-200/50 dark:bg-neutral-800/50 border border-neutral-300 dark:border-neutral-700 flex items-center justify-center group-hover:bg-foreground dark:group-hover:bg-foreground group-hover:text-background dark:group-hover:text-background transition-colors duration-500">
@@ -128,7 +118,6 @@ const OriginalTechTools = () => {
           </div>
         </motion.section>
       </div>
-    )
   );
 };
 

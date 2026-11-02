@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { Github, Mail, Linkedin, Instagram, Circle, LayoutGrid, Newspaper, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -314,18 +315,16 @@ const BroadsheetNavbar = () => {
                     delay: isOpen ? 0.3 + index * 0.1 : 0,
                   }}
                 >
-                  <motion.div
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
                     className={isHallmark
-                      ? "block text-5xl md:text-7xl text-nowrap font-serif italic text-foreground transition-all duration-300 hover:pl-4 hover:opacity-75 select-none cursor-none clickable"
-                      : "block text-4xl text-nowrap font-medium text-dark-gray transition-transform duration-300 hover:scale-110 hover:text-primary cursor-none clickable"
+                      ? "block text-5xl md:text-7xl text-nowrap font-serif italic text-foreground transition-all duration-300 hover:pl-4 hover:opacity-75 select-none cursor-none clickable focus-visible:outline-2 focus-visible:outline-offset-2"
+                      : "block text-4xl text-nowrap font-medium text-dark-gray transition-transform duration-300 hover:scale-110 hover:text-primary cursor-none clickable focus-visible:outline-2 focus-visible:outline-offset-2"
                     }
-                    onClick={() => {
-                      setIsOpen(false);
-                      router.push(`${link.href}`);
-                    }}
                   >
                     {link.label}
-                  </motion.div>
+                  </Link>
                 </motion.div>
               ))}
 

@@ -4,9 +4,9 @@ import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import { motion, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
-import Projects from "../Projects/About";
+import Projects from "../Projects/Featured";
 import TechTools from "../TechTools";
-import SmoothScrollHero from "../Parallax";
+import Certificates from "../Certificates";
 import { useTransitionState } from "../PageTransition";
 import { GraduationCap, Briefcase, Award, MapPin, Sparkles } from "lucide-react";
 import { CropMarks, RisoText } from "../BroadsheetHelpers";
@@ -186,7 +186,7 @@ const BroadsheetAbout = () => {
         </motion.section>
 
         <div className="w-full z-10 relative">
-          <SmoothScrollHero />
+          <Certificates />
         </div>
 
         <motion.section
@@ -210,7 +210,7 @@ const BroadsheetAbout = () => {
               <motion.div
                 key={idx}
                 variants={fadeInUp}
-                className="relative cursor-none clickable group"
+                className="relative group"
               >
                 <div className="absolute -left-8 sm:-left-12 top-0 -translate-x-1/2 w-8 h-8 bg-background border border-foreground/30 rounded-none flex items-center justify-center group-hover:border-foreground group-hover:bg-(--accent-vermilion) group-hover:text-white transition-all duration-300">
                   {item.icon}

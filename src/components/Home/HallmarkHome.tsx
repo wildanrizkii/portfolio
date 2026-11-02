@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, ReactNode } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import CircleAnimatedBackground from "@/components/AnimatedBackground/CircleAnimatedBackground";
 import AnimatedScrollMouse from "../AnimatedScrollMouse";
 import { motion, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
-import Projects from "../Projects/About";
+import Projects from "../Projects/Featured";
 import { Palette, Code2, Globe } from "lucide-react";
 import { FiArrowRight } from "react-icons/fi";
 import { useTransitionState } from "../PageTransition";
@@ -45,7 +45,6 @@ const backgroundFadeIn: Variants = {
 };
 
 const Portfolio = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const { isTransitioning } = useTransitionState();
   const { aesthetic } = useAesthetic();
@@ -149,18 +148,15 @@ const Portfolio = () => {
             </motion.p>
 
             <motion.div variants={fadeInUp} className="pt-2">
-              <motion.button
+              <Link
+                href="/about"
                 className={isHallmark
-                  ? "mt-4 px-6 py-3.5 border border-foreground bg-foreground text-background hover:bg-transparent hover:text-foreground rounded-none text-xs font-mono uppercase tracking-wider transition-colors duration-200 cursor-none clickable font-semibold"
-                  : "mt-2 md:mt-8 px-4 py-4 bg-foreground text-background rounded-md focus:outline-none text-lg md:text-xl w-37.5 md:w-45 cursor-none clickable"
+                  ? "mt-4 inline-block px-6 py-3.5 border border-foreground bg-foreground text-background hover:bg-transparent hover:text-foreground rounded-none text-xs font-mono uppercase tracking-wider transition-colors duration-200 cursor-none clickable font-semibold focus-visible:outline-2 focus-visible:outline-offset-2"
+                  : "mt-2 md:mt-8 inline-flex items-center justify-center px-4 py-4 bg-foreground text-background rounded-md text-lg md:text-xl w-37.5 md:w-45 cursor-none clickable font-medium transition-transform hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2"
                 }
-                whileHover={isHallmark ? { y: -2 } : { scale: 1.05 }}
-                whileTap={isHallmark ? { y: 0 } : { scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                onClick={() => router.push("/about")}
               >
                 About me
-              </motion.button>
+              </Link>
             </motion.div>
           </motion.div>
 
@@ -217,24 +213,19 @@ const Portfolio = () => {
             {isHallmark ? (
               <motion.a
                 href="mailto:wildanrizki9560@gmail.com"
-                className="px-8 py-4 border border-foreground bg-foreground text-background hover:bg-transparent hover:text-foreground text-xs font-mono uppercase tracking-widest transition-colors duration-200 rounded-none cursor-none clickable font-semibold whitespace-nowrap"
+                className="px-8 py-4 border border-foreground bg-foreground text-background hover:bg-transparent hover:text-foreground text-xs font-mono uppercase tracking-widest transition-colors duration-200 rounded-none cursor-none clickable font-semibold whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2"
                 whileHover={{ y: -2 }}
                 whileTap={{ y: 0 }}
               >
                 Write an Email
               </motion.a>
             ) : (
-              <motion.button
-                className="w-12 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-sm bg-foreground text-background mt-4 md:mt-0 cursor-none clickable"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                style={{ width: "180px" }}
+              <motion.a
+                href="mailto:wildanrizki9560@gmail.com"
+                className="w-45 h-14 md:h-16 flex items-center justify-center rounded-sm bg-foreground text-background mt-4 md:mt-0 font-semibold cursor-none clickable transition-transform hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2"
               >
-                <a href="mailto:wildanrizki9560@gmail.com" className="w-full h-full flex items-center justify-center font-semibold cursor-none clickable">
-                  Write an Email
-                </a>
-              </motion.button>
+                Write an Email
+              </motion.a>
             )}
           </motion.div>
         </motion.section>
@@ -267,7 +258,6 @@ interface StatItem {
 }
 
 const AboutBrief = () => {
-  const router = useRouter();
   const { isTransitioning } = useTransitionState();
   const { aesthetic } = useAesthetic();
   const isHallmark = aesthetic === "hallmark";
@@ -304,18 +294,16 @@ const AboutBrief = () => {
           frameworks like React and Next.js.
         </p>
         <motion.div className="pt-4">
-          <motion.button
+          <Link
+            href="/about"
             className={isHallmark
-              ? "flex items-center justify-center gap-2 px-6 py-3 border border-foreground bg-foreground text-background hover:bg-transparent hover:text-foreground text-xs font-mono uppercase tracking-wider transition-colors duration-200 rounded-none cursor-none clickable font-semibold"
-              : "flex items-center justify-center gap-2 px-6 py-3.5 bg-foreground text-background rounded-md text-base font-semibold group cursor-none clickable"
+              ? "inline-flex items-center justify-center gap-2 px-6 py-3 border border-foreground bg-foreground text-background hover:bg-transparent hover:text-foreground text-xs font-mono uppercase tracking-wider transition-colors duration-200 rounded-none cursor-none clickable font-semibold focus-visible:outline-2 focus-visible:outline-offset-2"
+              : "inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-foreground text-background rounded-md text-base font-semibold group cursor-none clickable transition-transform hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2"
             }
-            whileHover={isHallmark ? { y: -2 } : { scale: 1.05 }}
-            whileTap={isHallmark ? { y: 0 } : { scale: 0.95 }}
-            onClick={() => router.push("/about")}
           >
             Read my story
             <FiArrowRight className={isHallmark ? "" : "transition-transform group-hover:translate-x-1"} />
-          </motion.button>
+          </Link>
         </motion.div>
       </motion.div>
 

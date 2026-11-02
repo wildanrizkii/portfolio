@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import { Github, Mail, Linkedin, Instagram, Circle, LayoutGrid, Newspaper, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -133,8 +134,8 @@ const OriginalNavbar = () => {
   );
 
   const MobileSocialLinks = () => (
-    <div className="block md:hidden pb-28">
-      <div className="flex flex-col items-center justify-center gap-4">
+    <div className="block md:hidden pb-10 pt-4">
+      <div className="flex flex-row items-center justify-center gap-4">
         {socialLinks.map((link) => (
           <motion.a
             key={link.title}
@@ -171,8 +172,8 @@ const OriginalNavbar = () => {
   return (
     <>
       <nav
-        className={`fixed w-full z-50 transition-all duration-300 ${scrolled
-          ? "bg-transparent backdrop-blur-sm shadow-md py-2"
+        className={`absolute w-full z-50 transition-all duration-300 ${scrolled
+          ? "bg-background/80 backdrop-blur-md shadow-md py-2"
           : "bg-transparent py-4"
           }`}
       >
@@ -281,42 +282,44 @@ const OriginalNavbar = () => {
         animate={{ y: isOpen ? "0%" : "-100%", opacity: isOpen ? 1 : 0 }}
         exit={{ y: "-100%", opacity: 0 }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
-        className="fixed inset-0 z-40 bg-background"
+        className="fixed inset-0 z-40 bg-background overflow-y-auto"
       >
-        <div className="flex items-center justify-center h-full px-4">
-          <div className="grid sm:flex md:flex items-center justify-center gap-32 w-full max-w-7xl">
-            <div className="text-left space-y-14">
+        <div className="flex items-center justify-center min-h-full px-4 py-20">
+          <div className="grid sm:flex md:flex items-center justify-center gap-12 md:gap-32 w-full max-w-7xl">
+            <div className="text-left space-y-10 md:space-y-14">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.href}
-                  initial={{ y: -20, opacity: 0 }}
-                  animate={{ y: isOpen ? 0 : -20, opacity: isOpen ? 1 : 0 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{
+                    opacity: isOpen ? 1 : 0,
+                    y: isOpen ? 0 : 30,
+                  }}
                   transition={{
-                    duration: 0.3,
-                    ease: "easeOut",
-                    delay: index * 0.1,
+                    duration: 0.5,
+                    delay: isOpen ? 0.3 + index * 0.1 : 0,
                   }}
                 >
-                  <motion.div
-                    className="block text-4xl text-nowrap font-medium text-dark-gray transition-transform duration-300 hover:scale-110 hover:text-primary"
-                    onClick={() => {
-                      setIsOpen(false);
-                      router.push(`${link.href}`);
-                    }}
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="block text-4xl sm:text-5xl md:text-6xl text-nowrap font-medium text-dark-gray transition-transform duration-300 hover:scale-105 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2"
                   >
                     {link.label}
-                  </motion.div>
+                  </Link>
                 </motion.div>
               ))}
 
               {mounted && (
                 <motion.div
-                  initial={{ y: -20, opacity: 0 }}
-                  animate={{ y: isOpen ? 0 : -20, opacity: isOpen ? 1 : 0 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{
+                    opacity: isOpen ? 1 : 0,
+                    y: isOpen ? 0 : 30,
+                  }}
                   transition={{
-                    duration: 0.3,
-                    ease: "easeOut",
-                    delay: navLinks.length * 0.1,
+                    duration: 0.5,
+                    delay: isOpen ? 0.3 + navLinks.length * 0.1 : 0,
                   }}
                   className="block md:hidden relative mt-6"
                   ref={mobileDropdownRef}

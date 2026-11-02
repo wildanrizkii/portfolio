@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, ReactNode } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import { motion, Variants } from "framer-motion";
 import { FiArrowLeft } from "react-icons/fi";
@@ -39,7 +40,6 @@ interface TechStackGroup {
 }
 
 const BroadsheetSparepart = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const { isTransitioning } = useTransitionState();
 
@@ -134,14 +134,13 @@ const BroadsheetSparepart = () => {
           animate={isTransitioning ? "hidden" : "visible"}
           variants={staggerChildren}
         >
-          <motion.button
-            variants={fadeInUp}
-            className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-muted-foreground hover:text-(--accent-vermilion) transition-colors duration-150 mb-10 group cursor-none clickable"
-            onClick={() => router.back()}
+          <Link
+            href="/projects"
+            className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-muted-foreground hover:text-(--accent-vermilion) transition-colors duration-150 mb-10 group cursor-none clickable focus-visible:outline-2 focus-visible:outline-offset-2"
           >
-            <FiArrowLeft className="text-sm" />
-            Back
-          </motion.button>
+            <FiArrowLeft className="text-sm transition-transform group-hover:-translate-x-1" />
+            Back to Projects
+          </Link>
 
           <motion.div variants={fadeInUp} className="mb-6">
             <span className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-muted-foreground bg-white/40 dark:bg-white/5 border border-foreground/20 px-3 py-1.5 rounded-none">

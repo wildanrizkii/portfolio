@@ -5,9 +5,9 @@ import Navbar from "@/components/Navbar";
 import CircleAnimatedBackground from "@/components/AnimatedBackground/CircleAnimatedBackground";
 import { motion, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
-import Projects from "../Projects/About";
+import Projects from "../Projects/Featured";
 import TechTools from "../TechTools";
-import SmoothScrollHero from "../Parallax";
+import Certificates from "../Certificates";
 import { useTransitionState } from "../PageTransition";
 import { GraduationCap, Briefcase, Award, MapPin, Sparkles } from "lucide-react";
 import { useAesthetic } from "@/context/AestheticContext";
@@ -195,8 +195,8 @@ const About = () => {
                     variants={fadeInUp}
                     whileHover={isHallmark ? undefined : { y: -3, scale: 1.02 }}
                     className={isHallmark
-                      ? "flex flex-row items-center gap-4 p-4 border border-neutral-300 dark:border-neutral-800 -mt-px bg-white/10 dark:bg-white/2 backdrop-blur-md rounded-none cursor-none clickable hover:bg-foreground hover:text-background transition-all duration-300 group"
-                      : "flex flex-row items-center gap-4 p-5 rounded-2xl border-2 border-neutral-300 dark:border-neutral-800 bg-white/30 dark:bg-white/5 backdrop-blur-md cursor-none clickable hover:border-foreground transition-all duration-500 group"
+                      ? "flex flex-row items-center gap-4 p-4 border border-neutral-300 dark:border-neutral-800 -mt-px bg-white/10 dark:bg-white/2 backdrop-blur-md rounded-none hover:bg-foreground hover:text-background transition-all duration-300 group"
+                      : "flex flex-row items-center gap-4 p-5 rounded-2xl border-2 border-neutral-300 dark:border-neutral-800 bg-white/30 dark:bg-white/5 backdrop-blur-md hover:border-foreground transition-all duration-500 group"
                     }
                   >
                     <div className={isHallmark
@@ -263,7 +263,7 @@ const About = () => {
         </motion.section>
 
         <div className="w-full z-10 relative">
-          <SmoothScrollHero />
+          <Certificates />
         </div>
 
         <motion.section
@@ -293,7 +293,7 @@ const About = () => {
               <motion.div
                 key={idx}
                 variants={fadeInUp}
-                className="relative cursor-none clickable group"
+                className="relative group"
               >
                 <div className={isHallmark
                   ? "absolute -left-8 sm:-left-12 top-0 -translate-x-1/2 w-8 h-8 bg-background border border-neutral-300 dark:border-neutral-800 rounded-none flex items-center justify-center group-hover:border-foreground group-hover:bg-foreground group-hover:text-background transition-all duration-300"

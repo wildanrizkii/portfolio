@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, ReactNode } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import CircleAnimatedBackground from "@/components/AnimatedBackground/CircleAnimatedBackground";
 import AnimatedScrollMouse from "../AnimatedScrollMouse";
 import { motion, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
-import Projects from "../Projects/About";
+import Projects from "../Projects/Featured";
 import { Palette, Code2, Globe } from "lucide-react";
 import { FiArrowRight } from "react-icons/fi";
 import { useTransitionState } from "../PageTransition";
@@ -43,17 +43,7 @@ const backgroundFadeIn: Variants = {
   },
 };
 
-const navbarFadeDown: Variants = {
-  hidden: { opacity: 0, y: -50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut", delay: 0.7 },
-  },
-};
-
 const Portfolio = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const { isTransitioning } = useTransitionState();
 
@@ -79,14 +69,7 @@ const Portfolio = () => {
           <CircleAnimatedBackground />
         </motion.section>
 
-        <motion.nav
-          className="fixed top-0 left-0 w-full bg-white shadow-md z-50"
-          initial="hidden"
-          animate={isTransitioning ? "hidden" : "visible"}
-          variants={navbarFadeDown}
-        >
-          <Navbar />
-        </motion.nav>
+        <Navbar />
 
         <motion.section
           className="relative grid gap-16 px-4 md:px-12 py-48 md:py-56"
@@ -130,15 +113,12 @@ const Portfolio = () => {
               optimized user experiences.
             </motion.h1>
             <motion.div variants={fadeInUp}>
-              <motion.button
-                className="mt-2 md:mt-8 px-4 py-4 bg-foreground text-background rounded-md focus:outline-none text-lg md:text-xl w-37.5 md:w-45 cursor-none clickable"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                onClick={() => router.push("/about")}
+              <Link
+                href="/about"
+                className="mt-2 md:mt-8 inline-flex items-center justify-center px-4 py-4 bg-foreground text-background rounded-md text-lg md:text-xl w-37.5 md:w-45 cursor-none clickable font-medium transition-transform hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2"
               >
                 About me
-              </motion.button>
+              </Link>
             </motion.div>
           </motion.div>
 
@@ -181,17 +161,12 @@ const Portfolio = () => {
               Let's Work Together
             </h1>
 
-            <motion.button
-              className="w-12 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-sm bg-foreground text-background mt-4 md:mt-0 cursor-none clickable"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              style={{ width: "180px" }}
+            <motion.a
+              href="mailto:wildanrizki9560@gmail.com"
+              className="w-45 h-14 md:h-16 flex items-center justify-center rounded-sm bg-foreground text-background mt-4 md:mt-0 font-semibold cursor-none clickable transition-transform hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2"
             >
-              <a href="mailto:wildanrizki9560@gmail.com" className="w-full h-full flex items-center justify-center font-semibold cursor-none clickable">
-                Write an Email
-              </a>
-            </motion.button>
+              Write an Email
+            </motion.a>
           </motion.div>
         </motion.section>
 
@@ -217,7 +192,6 @@ interface StatItem {
 }
 
 const AboutBrief = () => {
-  const router = useRouter();
   const { isTransitioning } = useTransitionState();
 
   const stats: StatItem[] = [
@@ -249,15 +223,13 @@ const AboutBrief = () => {
           frameworks like React and Next.js.
         </p>
         <motion.div className="pt-4">
-          <motion.button
-            className="flex items-center justify-center gap-2 px-6 py-3.5 bg-foreground text-background rounded-md text-base font-semibold group cursor-none clickable"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => router.push("/about")}
+          <Link
+            href="/about"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-foreground text-background rounded-md text-base font-semibold group cursor-none clickable transition-transform hover:scale-105 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2"
           >
             Read my story
             <FiArrowRight className="transition-transform group-hover:translate-x-1" />
-          </motion.button>
+          </Link>
         </motion.div>
       </motion.div>
 
@@ -265,7 +237,7 @@ const AboutBrief = () => {
         {stats.map((stat, idx) => (
           <motion.div
             key={idx}
-            className="p-6 rounded-xl border-2 border-neutral-300 bg-white/20 backdrop-blur-xs flex flex-col justify-center text-center cursor-none clickable hover:border-black transition-colors duration-300"
+            className="p-6 rounded-xl border-2 border-neutral-300 bg-white/20 backdrop-blur-xs flex flex-col justify-center text-center hover:border-black transition-colors duration-300"
             variants={fadeInUp}
             whileHover={{ y: -5 }}
           >

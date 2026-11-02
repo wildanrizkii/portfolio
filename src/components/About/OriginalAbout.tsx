@@ -4,9 +4,9 @@ import Navbar from "@/components/Navbar";
 import CircleAnimatedBackground from "@/components/AnimatedBackground/CircleAnimatedBackground";
 import { motion, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
-import Projects from "../Projects/About";
+import Projects from "../Projects/Featured";
 import TechTools from "../TechTools";
-import SmoothScrollHero from "../Parallax";
+import Certificates from "../Certificates";
 import { useTransitionState } from "../PageTransition";
 import { GraduationCap, Briefcase, Award, MapPin, Download, Sparkles, ChevronRight } from "lucide-react";
 
@@ -31,15 +31,6 @@ const backgroundFadeIn: Variants = {
   visible: {
     opacity: 1,
     transition: { duration: 1, ease: "easeOut", delay: 0.5 },
-  },
-};
-
-const navbarFadeDown: Variants = {
-  hidden: { opacity: 0, y: -50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut", delay: 0.5 },
   },
 };
 
@@ -122,14 +113,7 @@ const About = () => {
           <CircleAnimatedBackground />
         </motion.section>
 
-        <motion.nav
-          className="fixed top-0 left-0 w-full bg-white shadow-md z-50"
-          initial="hidden"
-          animate={isTransitioning ? "hidden" : "visible"}
-          variants={navbarFadeDown}
-        >
-          <Navbar />
-        </motion.nav>
+        <Navbar />
 
         <motion.section
           className="relative px-4 md:px-12 pt-40 pb-20 max-w-6xl mx-auto"
@@ -167,7 +151,7 @@ const About = () => {
                   <motion.div
                     key={idx}
                     variants={fadeInUp}
-                    className="flex flex-row items-center gap-3 p-3 lg:p-4 rounded-xl border border-neutral-300/80 dark:border-neutral-800 bg-white/20 dark:bg-white/5 backdrop-blur-md cursor-none clickable hover:border-foreground transition-colors"
+                    className="flex flex-row items-center gap-3 p-3 lg:p-4 rounded-xl border border-neutral-300/80 dark:border-neutral-800 bg-white/20 dark:bg-white/5 backdrop-blur-md hover:border-foreground transition-colors"
                   >
                     <div className="p-2 rounded-lg bg-neutral-200/50 dark:bg-neutral-800/50 border border-neutral-300 dark:border-neutral-700 shrink-0">
                       {fact.icon}
@@ -218,7 +202,7 @@ const About = () => {
         </motion.section>
 
         <div className="w-full">
-          <SmoothScrollHero />
+          <Certificates />
         </div>
 
         <motion.section
@@ -242,7 +226,7 @@ const About = () => {
               <motion.div
                 key={idx}
                 variants={fadeInUp}
-                className="relative cursor-none clickable group"
+                className="relative group"
               >
                 <div className="absolute -left-8 sm:-left-12 top-0 -translate-x-1/2 w-10 h-10 rounded-full bg-background border-2 border-neutral-300 dark:border-neutral-700 flex items-center justify-center group-hover:border-foreground group-hover:bg-foreground group-hover:text-background transition-all duration-500 [&>svg]:group-hover:text-background">
                   {item.icon}

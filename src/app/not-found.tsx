@@ -1,8 +1,8 @@
-import HalamanTidakAda from "@/components/HalamanTidakAda";
+import NotFound from "@/components/NotFound";
 import React from "react";
 
-const NotFound = () => {
-  return <HalamanTidakAda />;
+const NotFoundPage = () => {
+  return <NotFound />;
 };
 
-export default NotFound;
+export default NotFoundPage;

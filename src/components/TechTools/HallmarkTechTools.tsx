@@ -31,17 +31,8 @@ interface SkillCategory {
 
 const HallmarkTechTools = () => {
   const pathname = usePathname();
-  const [isMounted, setIsMounted] = useState<boolean>(false);
   const { isTransitioning } = useTransitionState();
   const { aesthetic } = useAesthetic();
-
-  useEffect(() => {
-    setIsMounted(false);
-    const timer = setTimeout(() => {
-      setIsMounted(true);
-    }, 50);
-    return () => clearTimeout(timer);
-  }, [pathname]);
 
   const isHallmark = aesthetic === "hallmark";
 
@@ -73,39 +64,38 @@ const HallmarkTechTools = () => {
   ];
 
   return (
-    isMounted && (
-      <div className={`relative justify-center bg-transparent w-full max-w-5xl mx-auto py-16 z-10 ${isHallmark ? "px-6" : "px-4 md:px-8"}`}>
-        <motion.section
-          key={pathname}
-          initial="hidden"
-          whileInView={isTransitioning ? "hidden" : "visible"}
-          viewport={{ once: true, amount: 0.1 }}
-          variants={staggerChildren}
-          className="space-y-12"
-        >
-          <div>
-            <motion.p className={isHallmark ? "text-xs font-mono tracking-widest text-muted-foreground uppercase mb-2" : "text-sm font-semibold tracking-widest text-gray-500 uppercase mb-2"} variants={fadeInUp}>
-              Competencies
-            </motion.p>
-            <motion.h1
-              className={isHallmark ? "text-4xl md:text-6xl font-serif font-normal text-foreground" : "text-4xl md:text-5xl font-medium text-dark-gray"}
-              variants={fadeInUp}
-            >
-              Tech & Tools
-            </motion.h1>
-          </div>
+    <div className={`relative justify-center bg-transparent w-full max-w-5xl mx-auto py-16 z-10 ${isHallmark ? "px-6" : "px-4 md:px-8"}`}>
+      <motion.section
+        key={pathname}
+        initial="hidden"
+        whileInView={isTransitioning ? "hidden" : "visible"}
+        viewport={{ once: true, amount: 0.1 }}
+        variants={staggerChildren}
+        className="space-y-12"
+      >
+        <div>
+          <motion.p className={isHallmark ? "text-xs font-mono tracking-widest text-muted-foreground uppercase mb-2" : "text-sm font-semibold tracking-widest text-gray-500 uppercase mb-2"} variants={fadeInUp}>
+            Competencies
+          </motion.p>
+          <motion.h1
+            className={isHallmark ? "text-4xl md:text-6xl font-serif font-normal text-foreground" : "text-4xl md:text-5xl font-medium text-dark-gray"}
+            variants={fadeInUp}
+          >
+            Tech & Tools
+          </motion.h1>
+        </div>
 
-          <div className={isHallmark ? "grid grid-cols-1 md:grid-cols-2" : "grid grid-cols-1 md:grid-cols-2 gap-8"}>
-            {skillCategories.map((category, idx) => (
-              <motion.div
-                key={idx}
-                variants={fadeInUp}
-                whileHover={isHallmark ? undefined : { y: -6 }}
-                className={isHallmark 
-                  ? "p-8 border border-neutral-300 dark:border-neutral-800 -mr-px -mt-px bg-white/10 dark:bg-white/2 rounded-none hover:bg-neutral-100/50 dark:hover:bg-neutral-900/50 transition-colors duration-300 cursor-none clickable flex flex-col justify-between group h-full"
-                  : "p-8 rounded-2xl border-2 border-neutral-300 dark:border-neutral-800 bg-white/30 dark:bg-white/5 backdrop-blur-md hover:border-foreground transition-colors duration-500 cursor-none clickable flex flex-col justify-between group h-full"
-                }
-              >
+        <div className={isHallmark ? "grid grid-cols-1 md:grid-cols-2" : "grid grid-cols-1 md:grid-cols-2 gap-8"}>
+          {skillCategories.map((category, idx) => (
+            <motion.div
+              key={idx}
+              variants={fadeInUp}
+              whileHover={isHallmark ? undefined : { y: -6 }}
+              className={isHallmark 
+                ? "p-8 border border-neutral-300 dark:border-neutral-800 -mr-px -mt-px bg-white/10 dark:bg-white/2 rounded-none hover:bg-neutral-100/50 dark:hover:bg-neutral-900/50 transition-colors duration-300 flex flex-col justify-between group h-full"
+                : "p-8 rounded-2xl border-2 border-neutral-300 dark:border-neutral-800 bg-white/30 dark:bg-white/5 backdrop-blur-md hover:border-foreground transition-colors duration-500 flex flex-col justify-between group h-full"
+              }
+            >
                 <div className="space-y-4">
                   <div className="flex items-center gap-4">
                     <div className={isHallmark 
@@ -144,7 +134,6 @@ const HallmarkTechTools = () => {
           </div>
         </motion.section>
       </div>
-    )
   );
 };
 

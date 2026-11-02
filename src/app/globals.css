@@ -1,13 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Big+Shoulders+Display:wght@700;800;900&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=Spline+Sans+Mono:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 @config "../../tailwind.config.mjs";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --font-serif: 'Instrument Serif', Georgia, serif;
-  --font-sans: 'Plus Jakarta Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-serif: var(--font-instrument-serif), 'Instrument Serif', Georgia, serif;
+  --font-sans: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif;
+  --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
+  --font-display: var(--font-big-shoulders), 'Big Shoulders Display', sans-serif;
 
   /* Hallmark Default */
   --background: #faf9f6;
@@ -25,7 +25,7 @@
 html.aesthetic-original {
   --background: #f9f2ed;
   --foreground: #181818;
-  --muted-foreground: #737373;
+  --muted-foreground: #666666;
 }
 
 html.aesthetic-original.dark {
@@ -40,7 +40,7 @@ html.aesthetic-broadsheet {
   --foreground: #1e201e;
   --muted-foreground: #5c636e;
   --accent-vermilion: #ba3524;
-  --accent-teal: #3b7c80;
+  --accent-teal: #326b6f;
 }
 
 html.aesthetic-broadsheet.dark {
@@ -55,25 +55,24 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-sans), sans-serif;
-  cursor: none;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Disable all transitions saat first paint */
+/* Prevent flash of unstyled transitions on first paint */
 .no-transition *,
 .no-transition {
   transition: none !important;
   animation: none !important;
 }
 
-/* View Transitions API - Theme Ripple Effect */
+/* View Transitions API ripple effect */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
   mix-blend-mode: normal;
 }
 
-/* Optional: Smooth fade jika View Transitions tidak support */
+/* Background transition fallback when View Transitions are unsupported */
 @supports not (view-transition-name: auto) {
   body {
     transition:
@@ -82,7 +81,7 @@ body {
   }
 }
 
-/* Reduce motion support */
+/* Respect user motion preferences */
 @media (prefers-reduced-motion: reduce) {
 
   ::view-transition-old(root),
@@ -91,7 +90,7 @@ body {
   }
 }
 
-/* Jangan ikut View Transition */
+/* Exclude toggle button from root view transition */
 .theme-toggle,
 .theme-toggle * {
   view-transition-name: none;
@@ -100,7 +99,6 @@ body {
 html {
   @apply overflow-auto transition-all duration-300 scroll-smooth;
   scrollbar-width: none;
-  /* Firefox: sembunyikan scrollbar native */
 }
 
 html,
@@ -110,14 +108,13 @@ body {
   overscroll-behavior: none;
 }
 
-
-/* Sembunyikan scrollbar native Webkit saat idle */
+/* Hide native Webkit scrollbar while idle */
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent;
 }
 
-/* Tampilkan scrollbar hanya saat is-scrolling class aktif */
+/* Display subtle scrollbar while scrolling */
 html.is-scrolling::-webkit-scrollbar {
   width: 8px;
 }
@@ -139,38 +136,42 @@ html.is-scrolling::-webkit-scrollbar-track {
   pointer-events: none;
 }
 
-* {
-  cursor: none !important;
+/* Custom cursor only on devices that support hover with fine pointer */
+@media (hover: hover) and (pointer: fine) {
+  html.has-custom-cursor,
+  html.has-custom-cursor body,
+  html.has-custom-cursor a,
+  html.has-custom-cursor button,
+  html.has-custom-cursor [role="button"],
+  html.has-custom-cursor input,
+  html.has-custom-cursor textarea,
+  html.has-custom-cursor [contenteditable="true"] {
+    cursor: none !important;
+  }
 }
 
-/* Sembunyikan cursor bawaan untuk input dan text area agar hanya memakai custom cursor */
-input,
-textarea,
-[contenteditable="true"] {
-  cursor: none !important;
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .custom-cursor-outer,
+  .custom-cursor-inner {
+    display: none !important;
+  }
 }
 
-/* Tambahkan class ini ke elemen yang bisa diklik jika deteksi otomatis tidak bekerja */
-.clickable {
-  cursor: none !important;
+/* Interactive focus indicators for keyboard navigation (WCAG 2.2 AA) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
 }
 
 @layer utilities {
   ::selection {
     background: #d1d1d1;
     color: #000;
-  }
-}
-
-@media (max-width: 768px) {
-
-  .custom-cursor-outer,
-  .custom-cursor-inner {
-    display: none !important;
-  }
-
-  * {
-    cursor: auto !important;
   }
 }
 
@@ -197,10 +198,7 @@ textarea,
   animation: pageTransitionAnim 1.2s ease-in-out forwards;
 }
 
-/* ────────────────────────────────────────────────────────── */
-/* ─── ORIGINAL DESIGN SYSTEM AESTHETIC OVERRIDES ─── */
-/* ────────────────────────────────────────────────────────── */
-
+/* Original aesthetic typography overrides */
 html.aesthetic-original body {
   --font-serif: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif !important;
   --font-sans: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans', sans-serif !important;
@@ -208,20 +206,17 @@ html.aesthetic-original body {
   font-family: var(--font-plus-jakarta-sans), sans-serif !important;
 }
 
-/* ────────────────────────────────────────────────────────── */
-/* ─── BROADSHEET DESIGN SYSTEM AESTHETIC OVERRIDES ─── */
-/* ────────────────────────────────────────────────────────── */
-
+/* Broadsheet aesthetic typography overrides */
 html.aesthetic-broadsheet body {
-  --font-display: 'Big Shoulders Display', sans-serif !important;
-  --font-serif: 'Fraunces', Georgia, serif !important;
-  --font-sans: 'Spline Sans Mono', monospace !important;
-  --font-mono: 'Spline Sans Mono', monospace !important;
+  --font-display: var(--font-big-shoulders), 'Big Shoulders Display', sans-serif !important;
+  --font-serif: var(--font-fraunces), 'Fraunces', Georgia, serif !important;
+  --font-sans: var(--font-spline-mono), 'Spline Sans Mono', monospace !important;
+  --font-mono: var(--font-spline-mono), 'Spline Sans Mono', monospace !important;
   font-family: var(--font-sans), monospace !important;
   position: relative;
 }
 
-/* Paper Grain Texture and Halftone Grid Background */
+/* Paper grain texture and halftone grid background */
 html.aesthetic-broadsheet body::before {
   content: "";
   position: fixed;

@@ -29,6 +29,7 @@ export const RisoText = ({ children, className = "" }: RisoTextProps) => {
   return (
     <span className="riso-container relative inline-block">
       <motion.span
+        aria-hidden="true"
         initial={{ x: 6, y: 4 }}
         animate={{ x: 1.5, y: 1.25 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
@@ -37,6 +38,7 @@ export const RisoText = ({ children, className = "" }: RisoTextProps) => {
         {children}
       </motion.span>
       <motion.span
+        aria-hidden="true"
         initial={{ x: -5, y: -3 }}
         animate={{ x: -1.5, y: -1.25 }}
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}

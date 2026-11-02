@@ -34,15 +34,6 @@ const staggerChildren: Variants = {
   },
 };
 
-const navbarFadeDown: Variants = {
-  hidden: { opacity: 0, y: -40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut", delay: 0.3 },
-  },
-};
-
 interface MetaItem {
   label: string;
   value: string;
@@ -133,14 +124,7 @@ const Sparepart = () => {
       transition={{ duration: 0.6 }}
     >
       <div className="relative min-h-screen">
-        <motion.nav
-          className="fixed top-0 left-0 w-full bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-xs z-50"
-          initial="hidden"
-          animate={isTransitioning ? "hidden" : "visible"}
-          variants={navbarFadeDown}
-        >
-          <Navbar />
-        </motion.nav>
+        <Navbar />
 
         <motion.section
           className="relative pt-36 sm:pt-44 md:pt-52 pb-20 px-4 md:px-8 max-w-6xl mx-auto"

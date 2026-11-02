@@ -1,8 +1,5 @@
-import React from "react";
-import AdoraSaaSNew from "@/components/Projects/AdoraSaaSNew";
+import { redirect } from "next/navigation";
 
-const Page = () => {
-  return <AdoraSaaSNew />;
-};
-
-export default Page;
+export default function Page() {
+  redirect("/projects/adelle-apps");
+}

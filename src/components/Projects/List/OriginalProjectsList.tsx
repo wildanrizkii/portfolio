@@ -8,69 +8,7 @@ import Navbar from "@/components/Navbar";
 import CircleAnimatedBackground from "@/components/AnimatedBackground/CircleAnimatedBackground";
 import { useTransitionState } from "../../PageTransition";
 import useDebounce from "@/hooks/useDebounce";
-
-interface ProjectItem {
-  title: string;
-  category: string;
-  description: string;
-  tech: string[];
-  img: string;
-  imgFit?: string;
-  href: string;
-  categoryFilter: string;
-}
-
-const projectList: ProjectItem[] = [
-  {
-    title: "Adora SaaS",
-    category: "SaaS · Healthcare ERP",
-    description: "A cloud-native, multi-tenant SaaS pharmacy platform rebuilt with NestJS & Next.js 16 — managing prescriptions, drug inventory, staff roles, and branch analytics across multiple tenants.",
-    tech: ["Next.js 16", "NestJS", "React 19", "Shadcn UI"],
-    img: "/images/adora-saas/adora-1.webp",
-    imgFit: "contain",
-    href: "/projects/adora-saas",
-    categoryFilter: "saas",
-  },
-  {
-    title: "Cash Flow Tracking Application",
-    category: "Financial Dashboard",
-    description: "A tracking application with clean analytics, charts, and transaction history filters for personal financial management.",
-    tech: ["Next.js", "Recharts", "PostgreSQL", "Supabase"],
-    img: "/images/Cashify.png",
-    href: "/projects/cashflow",
-    categoryFilter: "finance",
-  },
-  {
-    title: "Adora Pharmacy Management System",
-    category: "Healthcare · Management System",
-    description: "A full-featured pharmacy management system built for PT Adora Cipta Medika (2024) — managing prescriptions, drug inventory, staff roles, and financial reporting from a centralized dashboard.",
-    tech: ["Next.js", "Express.js", "Ant Design", "PostgreSQL"],
-    img: "/images/Apotek.jpg",
-    href: "/projects/adora",
-    categoryFilter: "saas",
-  },
-  {
-    title: "Spare Part Information System",
-    category: "Full-Stack Sales Platform",
-    description: "An intuitive web platform designed to manage complex spare part hierarchies, vendor specifications, materials, and automated order generation.",
-    tech: ["Next.js", "React", "Tailwind CSS", "PostgreSQL"],
-    img: "",
-    href: "/projects/sparepart",
-    categoryFilter: "full-stack",
-  },
-];
-
-interface CategoryItem {
-  id: string;
-  label: string;
-}
-
-const categories: CategoryItem[] = [
-  { id: "all", label: "All Works" },
-  { id: "full-stack", label: "Full-Stack" },
-  { id: "saas", label: "Healthcare SaaS" },
-  { id: "finance", label: "Finance" },
-];
+import { projectList, projectCategories as categories, ProjectItem } from "@/data/projects";
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 50 },
@@ -90,15 +28,6 @@ const backgroundFadeIn: Variants = {
   visible: {
     opacity: 1,
     transition: { duration: 1, ease: "easeOut", delay: 0.5 },
-  },
-};
-
-const navbarFadeDown: Variants = {
-  hidden: { opacity: 0, y: -50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut", delay: 0.5 },
   },
 };
 
@@ -165,14 +94,7 @@ const ProjectList = () => {
           <CircleAnimatedBackground />
         </motion.section>
 
-        <motion.nav
-          className="fixed top-0 left-0 w-full bg-white shadow-md z-50"
-          initial="hidden"
-          animate={isTransitioning ? "hidden" : "visible"}
-          variants={navbarFadeDown}
-        >
-          <Navbar />
-        </motion.nav>
+        <Navbar />
 
         <div className="relative w-full max-w-5xl mx-auto pt-36 md:pt-48 pb-12 grow z-10 px-4 md:px-8">
           <motion.section

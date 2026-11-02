@@ -19,6 +19,12 @@ const CustomCursor = () => {
   const trailY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+    if (!mediaQuery.matches) {
+      return;
+    }
+    document.documentElement.classList.add("has-custom-cursor");
+
     const moveCursor = (e: globalThis.MouseEvent) => {
       if (!hasMoved) {
         mouseX.set(e.clientX);
@@ -61,6 +67,7 @@ const CustomCursor = () => {
     window.addEventListener("blur", handleBlur);
 
     return () => {
+      document.documentElement.classList.remove("has-custom-cursor");
       window.removeEventListener("mousemove", moveCursor);
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);

@@ -1,8 +1,15 @@
 import React from "react";
-import AdoraSaaS from "@/components/Projects/AdoraSaaS";
+import AdoraPharmacy from "@/components/Projects/AdoraPharmacy";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Adora Pharmacy Management System",
+  description:
+    "A full-featured pharmacy management system built for PT Adora Cipta Medika (2024) — managing prescriptions, inventory, and reporting.",
+};
 
 const Page = () => {
-  return <AdoraSaaS />;
+  return <AdoraPharmacy />;
 };
 
 export default Page;

@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, ReactNode } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import { motion, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
-import Projects from "../Projects/About";
+import Projects from "../Projects/Featured";
 import { Palette, Code2, Globe } from "lucide-react";
 import { FiArrowRight } from "react-icons/fi";
 import { useTransitionState } from "../PageTransition";
@@ -27,7 +27,6 @@ const staggerChildren: Variants = {
 };
 
 const BroadsheetHome = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const { isTransitioning } = useTransitionState();
 
@@ -85,12 +84,12 @@ const BroadsheetHome = () => {
             </motion.p>
 
             <motion.div variants={fadeInUp} className="pt-4">
-              <motion.button
-                className="px-8 py-4 border-2 border-foreground bg-(--accent-vermilion) text-white hover:bg-foreground hover:text-background rounded-none text-xs font-mono uppercase tracking-wider cursor-none clickable font-semibold active:translate-y-px shadow-[4px_4px_0px_0px_var(--foreground)] hover:shadow-none transition-all duration-150"
-                onClick={() => router.push("/about")}
+              <Link
+                href="/about"
+                className="inline-block px-8 py-4 border-2 border-foreground bg-(--accent-vermilion) text-white hover:bg-foreground hover:text-background rounded-none text-xs font-mono uppercase tracking-wider cursor-none clickable font-semibold active:translate-y-px shadow-[4px_4px_0px_0px_var(--foreground)] hover:shadow-none transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-2"
               >
                 Read About me
-              </motion.button>
+              </Link>
             </motion.div>
           </motion.div>
         </motion.section>
@@ -174,7 +173,6 @@ interface StatItem {
 }
 
 const AboutBrief = () => {
-  const router = useRouter();
   const { isTransitioning } = useTransitionState();
 
   const stats: StatItem[] = [
@@ -206,13 +204,13 @@ const AboutBrief = () => {
           frameworks like React and Next.js.
         </p>
         <motion.div className="pt-4">
-          <motion.button
-            className="flex items-center justify-center gap-2 px-6 py-3 border-2 border-foreground bg-transparent text-foreground hover:bg-foreground hover:text-background text-xs font-mono uppercase tracking-wider transition-all duration-150 rounded-none cursor-none clickable font-semibold shadow-[4px_4px_0px_0px_var(--foreground)] hover:shadow-none active:translate-y-px"
-            onClick={() => router.push("/about")}
+          <Link
+            href="/about"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 border-2 border-foreground bg-transparent text-foreground hover:bg-foreground hover:text-background text-xs font-mono uppercase tracking-wider transition-all duration-150 rounded-none cursor-none clickable font-semibold shadow-[4px_4px_0px_0px_var(--foreground)] hover:shadow-none active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2"
           >
             Read my story
             <FiArrowRight className="text-sm" />
-          </motion.button>
+          </Link>
         </motion.div>
       </motion.div>
 
@@ -220,7 +218,7 @@ const AboutBrief = () => {
         {stats.map((stat, idx) => (
           <motion.div
             key={idx}
-            className="p-6 border border-foreground/30 -mr-px -mt-px bg-white/10 dark:bg-white/2 backdrop-blur-xs flex flex-col justify-center text-center rounded-none cursor-none clickable hover:bg-(--accent-vermilion) hover:text-white transition-all duration-200 group"
+            className="p-6 border border-foreground/30 -mr-px -mt-px bg-white/10 dark:bg-white/2 backdrop-blur-xs flex flex-col justify-center text-center rounded-none hover:bg-(--accent-vermilion) hover:text-white transition-all duration-200 group"
             variants={fadeInUp}
           >
             <h3 className="text-3xl md:text-4xl font-display font-black uppercase mb-1 text-foreground group-hover:text-white transition-colors">
